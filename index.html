@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Día de la madre</title>
+
+<!-- Open Sans -->
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,800&display=swap" rel="stylesheet">
+
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #000;
+  width: 100%;
+  height: 100%;
+}
+
+.pantalla {
+  width:1440px;
+  height: 480px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-origin: top left;
+  overflow: hidden;
+}
+
+/* 👇 VIDEO DE FONDO REAL */
+video#fondoVideo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.contenedor-frase {
+  position: absolute;
+  top: 230px;
+  left: 749px;
+  width: 602px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2; /* 👈 encima del video */
+}
+
+#frase {
+  font-size: 49px;
+  color: #F3574A; /* 👈 color correcto */
+  font-family: "Open Sans", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+  letter-spacing: 2px;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+<div class="pantalla" id="pantalla">
+
+  <!-- 👇 VIDEO -->
+  <video id="fondoVideo" autoplay muted loop playsinline>
+    <source src="fondo.mp4" type="video/mp4">
+  </video>
+
+  <!-- TEXTO -->
+  <div class="contenedor-frase">
+    <div id="frase">Cargando frase...</div>
+  </div>
+
+</div>
+
+<script>
+const frases = [
+"Usted no se manda solo.",
+"Mientras viva bajo este techo, se hace lo que yo diga",
+"No me abra los ojos que no le voy a echar gotas",
+"Si sus amigos se tiran de un puente, ¿usted también?",
+"Le entra por un oído y le sale por el otro",
+"Cuento hasta 3...",
+"¡Búsqueme que me va a encontrar!",
+"Algún día me lo va a agradecer.",
+"Cuando tengas hijos, te vas a acordar de mí."
+];
+
+let index = 0;
+const elemento = document.getElementById("frase");
+
+function cambiarFrase() {
+  elemento.textContent = frases[index];
+  index = (index + 1) % frases.length;
+}
+
+// 👇 mejor compatibilidad en pantallas
+function loopFrases() {
+  cambiarFrase();
+  setTimeout(loopFrases, 7000);
+}
+
+loopFrases();
+
+function escalarPantalla() {
+  const escalaX = window.innerWidth / 1800;
+  const escalaY = window.innerHeight / 540;
+  const escala = Math.max(escalaX, escalaY);
+
+  document.getElementById("pantalla").style.transform = `scale(${escala})`;
+}
+
+window.addEventListener("resize", escalarPantalla);
+escalarPantalla();
+</script>
+</body>
+</html>
+
+
+
+
+
+
