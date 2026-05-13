@@ -107,8 +107,8 @@ function loopFrases() {
 loopFrases();
 
 function escalarPantalla() {
-  const escalaX = window.innerWidth / 1800;
-  const escalaY = window.innerHeight / 540;
+  const escalaX = window.innerWidth / 1440;
+  const escalaY = window.innerHeight / 480;
   const escala = Math.max(escalaX, escalaY);
 
   document.getElementById("pantalla").style.transform = `scale(${escala})`;
